@@ -1,0 +1,9 @@
+WISHLIST MODEL
+ * Stores the stocks a user wants to watch, along with a computed
+ * growth score that is updated whenever fresh market data comes in.
+ *
+ * Growth Score (0–100) is a weighted composite of:
+ *   40%  momentum   — recent price trend direction
+ *   30%  volume     — unusual buying/selling interest
+ *   20%  fundamental— P/E, EPS, revenue trend
+ *   10%  sentiment  — analyst ratings + news score

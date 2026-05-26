@@ -1,0 +1,54 @@
+PREDICTION MODEL
+ * Stores a prediction run for one stock, capturing all the input
+ * factors used, the model output, and the accuracy once the
+ * prediction window closes.
+ *
+ * ── FACTOR GROUPS ──────────────────────────────────────────────────
+ *
+ *  1. TECHNICAL INDICATORS  (price-chart derived)
+ *     • SMA / EMA (50d, 200d)   — trend direction
+ *     • RSI (14d)               — overbought / oversold (>70 sell, <30 buy)
+ *     • MACD + signal line      — momentum crossover
+ *     • Bollinger Bands width   — volatility squeeze breakout signal
+ *     • ATR (Average True Range)— daily volatility magnitude
+ *     • OBV (On-Balance Volume) — volume confirms price move
+ *
+ *  2. FUNDAMENTAL FACTORS  (company financials)
+ *     • P/E ratio               — valuation vs earnings
+ *     • EPS (TTM)               — profitability per share
+ *     • Revenue growth (YoY %)  — top-line expansion
+ *     • Net Margin (%)          — efficiency
+ *     • Debt-to-Equity ratio    — financial health / risk
+ *     • ROE (Return on Equity)  — management effectiveness
+ *     • Free Cash Flow          — cash left after capex
+ *
+ *  3. MARKET / MACRO FACTORS
+ *     • Beta                    — how much the stock moves vs the index
+ *     • Sector index return     — sector tailwinds / headwinds
+ *     • Nifty/Sensex 5d return  — broad market momentum
+ *     • FII / DII net buy data  — institutional flow
+ *     • Interest rate (repo)    — macro rate environment
+ *
+ *  4. SENTIMENT FACTORS
+ *     • News sentiment score    — NLP score of last 7d headlines (-1 to +1)
+ *     • Analyst consensus       — buy / hold / sell count
+ *     • Social media buzz score — Reddit / Twitter mention velocity
+ *     • Insider transactions    — insider buy/sell ratio last 90d
+ *
+ *  5. PRICE-PATTERN FLAGS  (boolean signals)
+ *     • goldenCross             — 50d SMA crossed above 200d SMA
+ *     • deathCross              — 50d SMA crossed below 200d SMA
+ *     • breakoutAboveResistance — price crossed key resistance level
+ *     • breakdownBelowSupport   — price fell below key support level
+ *     • highVolumeSpike         — today's volume > 2× 20d avg volume
+
+
+
+
+Prediction model — the 5 factor groups
+Technical indicators (price-chart derived) — SMA/EMA, RSI, MACD, Bollinger Bands width, ATR, OBV
+Fundamental factors (company financials) — P/E, P/B, EPS, revenue growth YoY%, net margin, debt-to-equity, ROE, free cash flow
+Macro/market factors — Beta, sector index 5d return, Nifty/Sensex 5d return, FII/DII net buy flow, repo rate
+Sentiment factors — News NLP score (-1 to +1), analyst buy/hold/sell counts, social buzz score, insider buy ratio
+Pattern flags (booleans) — golden cross, death cross, breakout above resistance, RSI overbought/oversold, MACD bullish/bearish crossover
+The prediction also stores the full outcome (actual price, whether direction was correct, price error %) once the prediction window closes, and a userAccuracy() static that aggregates your model's hit rate over time.
